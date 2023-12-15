@@ -10,7 +10,7 @@ pipeline {
 			}
     }
 
-    stage('RunSCAAnalysisUsingSnyk') {
+   stage('RunSCAAnalysisUsingSnyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
@@ -19,7 +19,7 @@ pipeline {
     }		
   }
 
-    stage('Build') { 
+   stage('Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
@@ -29,7 +29,7 @@ pipeline {
             }
     }
 
-    stage('Push') {
+   stage('Push') {
             steps {
                 script{
                     docker.withRegistry('https://771505854103.dkr.ecr.us-east-1.amazonaws.com/maheshdte', 'ecr:us-east-1:aws-credentials') {
